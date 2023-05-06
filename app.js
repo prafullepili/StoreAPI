@@ -1,8 +1,8 @@
 const express = require('express');
 require('dotenv').config()
 const app = express()
-const productsRoutes = require('./routes/products');
-const connectDB = require('./DB/connection');
+const productsRoutes = require('./routes/products'); //Routes
+const connectDB = require('./DB/connection'); //DB connect logic
 
 const USERNAME = process.env.DATABASE_USERNAME
 const PASSWORD = encodeURIComponent(process.env.DATABASE_PASSWORD)
@@ -26,4 +26,5 @@ const start = async () => {
 }
 
 start()
+console.clear();
 module.exports = MONGO_URI
