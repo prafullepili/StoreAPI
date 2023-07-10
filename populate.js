@@ -10,13 +10,25 @@ const MONGO_URI = require("./app");
 const jsonProducts = require('./products.json');
 const { exitCode } = require("process");
 
+function sleep(miliseconds) {
+    var currentTime = new Date().getTime();
+    while (currentTime + miliseconds >= new Date().getTime()) {
+    }
+ }
+
 const start = async () => {
     try {
         await connectDB(MONGO_URI);
         readline.question("Do you really want to delete data from database -> Y/N ?", async confirmation => {
             if (confirmation == 'Y') {
                 await Product.deleteMany();
-                await Product.create(jsonProducts);
+                for (const key in jsonProducts) {
+                    const element = jsonProducts[key];
+                    // sleep(1000)
+                    const p = await Product.create(element);
+                    console.log(p)
+                }
+                // await Product.create(jsonProducts);
                 console.log("deleted and created Success!!")
                 process.exit()
             } else if (confirmation == "N") {

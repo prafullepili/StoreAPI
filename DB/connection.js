@@ -6,11 +6,7 @@ const connectDB = (url) => {
         useCreateIndex: true,
         useFindAndModify: false,
         useUnifiedTopology: true
-    })
-    if (mongoCon) {
-        console.log("MongoDB connected!")
-        return mongoCon;
-    }
+    }, (err)=>err ? console.log(err): console.log("MongoDB connected..."))
 }
 
 module.exports = connectDB

@@ -11,10 +11,11 @@ const DATABASE_NAME = "STORE_API"
 const MONGO_URI = `mongodb+srv://${USERNAME}:${PASSWORD}@nodeexpressproject.${MONGO_OBJ}.mongodb.net/${DATABASE_NAME}?retryWrites=true&w=majority`
 const PORT = 3000
 
-app.get('/', (req, res) => {
-    res.send("Hello Product API")
-})
 app.use('/api/v1/products', productsRoutes)
+
+// products?sort=createdAt&limit=10&page=1&select=company,price&featured=true&name="wooden desk"&numericFilters=price>40,rating>=4
+// products?sort=createdAt&page=1&select=company,price&numericFilters=price<40
+// products?numericFilters=price<20&select=company,price
 
 const start = async () => {
     try {
@@ -26,5 +27,4 @@ const start = async () => {
 }
 
 start()
-console.clear();
 module.exports = MONGO_URI
